@@ -1,35 +1,119 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Игра-кликер</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Арканум: Ловец Искр</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header class="top">
+    <h1 class="title">Арканум: Ловец Искр</h1>
 
-  <h1>Игра-кликер</h1>
+    <div class="stats-row">
+      <span id="score">0 маны</span>
+      <span id="timer">30</span>
+      <span id="record">0 маны</span>
+    </div>
 
-  <div class="panel">
-    <div>Очки: <span id="score">0</span></div>
-    <div>Время: <span id="timer">30</span></div>
-    <div>Рекорд: <span id="record">0</span></div>
+    <div class="levels">
+      <button class="level active" data-time="30">Первый курс: Новобранец</button>
+      <button class="level" data-time="20">Экзамен мага: Архивные тени</button>
+      <button class="level" data-time="15">Запретная башня: Ступени Бездны</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="playArea" class="play-area">
+      <button id="clickButton" class="spark" type="button">✨ Искра</button>
+    </div>
+
+    <p id="message" class="message">
+      Добро пожаловать в Академию Арканума.
+    </p>
+
+    <div class="controls">
+      <button id="restartButton" class="restart-button" type="button" style="display:none">
+        Сыграть ещё
+      </button>
+    </div>
+  </main>
+
+  <!-- Окно истории/инструкций -->
+  <div id="introOverlay" class="setup-overlay">
+    <div class="setup-panel">
+      <div class="setup-glow"></div>
+      <h2>Арканум: Ловец Искр</h2>
+      <p class="setup-subtitle">
+        Сегодня экзамен в Академии Арканума. Лови искры — копи ману. Избегай проклятий — они воруют ману и самооценку.
+        В дуэли ученики ходят по очереди. Кто соберёт больше маны — тот покорит Совет магов.
+      </p>
+      <div class="setup-section">
+        <div class="setup-label">Как играть</div>
+        <ul class="intro-list">
+          <li>Нажимай по искрам: ✨ ⚡ 🔮 🌟 — это мана.</li>
+          <li>Не трогай проклятия: ☠️ 💀 🕳️ 🧿 — они снимают ману.</li>
+          <li>Чем выше уровень, тем быстрее прыгает искра и быстрее сжимается.</li>
+          <li>Экзамен идёт по таймеру. Собери максимум до нуля.</li>
+        </ul>
+      </div>
+      <button id="introContinueButton" class="start-exam-button" type="button">
+        Понятно, к свиткам ✨
+      </button>
+    </div>
   </div>
 
-  <div class="difficulty">
-    <button class="level active" data-time="30">Легко</button>
-    <button class="level" data-time="20">Нормально</button>
-    <button class="level" data-time="15">Хард</button>
+  <!-- Окно выбора режима и имён -->
+  <div id="setupOverlay" class="setup-overlay">
+    <div class="setup-panel">
+      <div class="setup-glow"></div>
+
+      <h2>🏛 Академия Арканума</h2>
+      <p class="setup-subtitle">
+        Выбери формат экзамена и впиши имена учеников.
+        Профессор уже смотрит. Это не угроза. Почти.
+      </p>
+
+      <div class="setup-section">
+        <div class="setup-label">Режим испытания</div>
+
+        <div class="mode-cards">
+          <button class="mode-card active" type="button" data-mode="1">
+            <span class="mode-icon">🧙</span>
+            <span class="mode-title">Один ученик</span>
+            <span class="mode-text">Собери как можно больше маны</span>
+          </button>
+
+          <button class="mode-card" type="button" data-mode="2">
+            <span class="mode-icon">⚔️</span>
+            <span class="mode-title">Дуэль учеников</span>
+            <span class="mode-text">Ходы по очереди, победит сильнейший</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="setup-section">
+        <div class="setup-label">Имена участников</div>
+
+        <div class="name-fields">
+          <label class="name-field">
+            <span>Первый ученик</span>
+            <input id="setupPlayer1" type="text" value="Ученик 1" maxlength="18">
+          </label>
+
+          <label id="setupPlayer2Wrap" class="name-field hidden">
+            <span>Второй ученик</span>
+            <input id="setupPlayer2" type="text" value="Ученик 2" maxlength="18">
+          </label>
+        </div>
+      </div>
+
+      <button id="startSetupButton" class="start-exam-button" type="button">
+        ✨ Начать экзамен
+      </button>
+    </div>
   </div>
 
-  <div id="playArea">
-    <button id="clickButton">Жми!</button>
-  </div>
-
-  <div id="message"></div>
-
-  <button id="restartButton">Играть заново</button>
-
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
