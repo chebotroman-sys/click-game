@@ -1,3 +1,19 @@
+// Фоновая музыка
+const backgroundMusic = new Audio('music.mp3');
+backgroundMusic.loop = true;
+backgroundMusic.volume = 0.3;
+
+window.addEventListener('load', () => {
+    backgroundMusic.play().catch(() => {
+        document.addEventListener('click', () => {
+            backgroundMusic.play();
+        }, { once: true });
+    });
+});
+
+// Дальше идёт твой существующий код игры...
+// ...весь остальной код script.js остаётся без изменений
+
 // Режимы и игроки
 let gameMode = 1;
 
