@@ -51,7 +51,7 @@ function createBomb() {
   playArea.appendChild(bomb);
   moveElement(bomb);
 
-  bomb.addEventListener("click", function () {
+  function hitBomb() {
     score = score - 3;
 
     if (score < 0) {
@@ -60,11 +60,14 @@ function createBomb() {
 
     scoreText.textContent = score;
     bomb.remove();
-  });
+  }
+
+  bomb.addEventListener("click", hitBomb);
+  bomb.addEventListener("touchstart", hitBomb);
 
   setTimeout(function () {
     bomb.remove();
-  }, 1800);
+  }, 3000);
 }
 
 function clearBombs() {
@@ -108,7 +111,7 @@ function startGame() {
 
   bombTimer = setInterval(function () {
     createBomb();
-  }, 1200);
+  }, 900);
 }
 
 function endGame() {
