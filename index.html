@@ -2,20 +2,24 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Моя первая игра</title>
-  <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Игра-кликер</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Моя первая игра</h1>
 
-<div id="game">
-  <p>Счёт: <span id="score">0</span></p>
+  <h1>Игра-кликер</h1>
+
+  <div class="panel">
+    <div>Очки: <span id="score">0</span></div>
+    <div>Время: <span id="timer">30</span></div>
+  </div>
 
   <div id="playArea">
-    <button id="scoreButton">Нажми меня!</button>
+    <button id="clickButton">Жми!</button>
   </div>
-</div>
+
+  <div id="message"></div>
 
   <script src="script.js"></script>
 </body>

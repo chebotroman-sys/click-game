@@ -1,111 +1,58 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
+  margin: 0;
+  padding: 15px;
   font-family: Arial, sans-serif;
-  background: #f2f6ff;
   text-align: center;
-  margin-top: 80px;
+  background: #f2f2f2;
 }
 
 h1 {
-  color: #2b3a67;
+  margin: 10px 0 15px;
+}
+
+.panel {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
 #playArea {
   position: relative;
   width: 100%;
+  max-width: 600px;
   height: 60vh;
-  border: 2px solid #333;
+  margin: 0 auto;
+  border: 3px solid #333;
+  background: white;
   overflow: hidden;
-}
-
-#scoreButton {
-  position: absolute;
-  width: 180px;
-  height: 60px;
-  font-size: 22px;
   border-radius: 12px;
 }
 
-button {
-  background: #4f7cff;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-button:hover {
-  background: #365edc;
-}
-
-#score {
-  font-weight: bold;
-  font-size: 24px;
-}let score = 0;
-let time = 10;
-let timer;
-
-const button = document.getElementById("scoreButton");
-const scoreText = document.getElementById("score");
-
-const timerText = document.createElement("p");
-document.getElementById("game").appendChild(timerText);
-
-const resultText = document.createElement("p");
-document.getElementById("game").appendChild(resultText);
-
-const restartButton = document.createElement("button");
-restartButton.textContent = "Начать заново";
-restartButton.style.display = "none";
-document.getElementById("game").appendChild(restartButton);
-
-function startGame() {
-  score = 0;
-  time = 10;
-
-  scoreText.textContent = score;
-  timerText.textContent = "Время: " + time;
-  resultText.textContent = "";
-  button.disabled = false;
-  restartButton.style.display = "none";
-
-  clearInterval(timer);
-
-  timer = setInterval(function () {
-    time = time - 1;
-    timerText.textContent = "Время: " + time;
-
-    if (time <= 0) {
-      clearInterval(timer);
-      button.disabled = true;
-      resultText.textContent = "Игра окончена! Твой результат: " + score;
-      restartButton.style.display = "inline-block";
-    }
-  }, 1000);
-}
-
-button.addEventListener("click", function () {
-  score = score + 1;
-  scoreText.textContent = score;
-});
-
-restartButton.addEventListener("click", function () {
-  startGame();
-});
-
-startGame();
-#game {
-  position: relative;
-  height: 400px;
-  border: 2px solid #333;
-  overflow: hidden;
-}
-
-#scoreButton {
+#clickButton {
   position: absolute;
-  width: 140px;
-  height: 50px;
-  font-size: 18px;
-  border-radius: 10px;
+  width: 130px;
+  height: 55px;
+  font-size: 20px;
+  border: none;
+  border-radius: 12px;
+  background: #ff4d6d;
+  color: white;
+  font-weight: bold;
+}
+
+#clickButton:disabled {
+  background: #777;
+}
+
+#message {
+  margin-top: 15px;
+  font-size: 24px;
+  font-weight: bold;
 }

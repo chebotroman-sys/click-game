@@ -1,58 +1,47 @@
 let score = 0;
-let time = 10;
-let timer;
+let timeLeft = 30;
 
-const button = document.getElementById("scoreButton");
 const scoreText = document.getElementById("score");
+const timerText = document.getElementById("timer");
+const button = document.getElementById("clickButton");
+const playArea = document.getElementById("playArea");
+const message = document.getElementById("message");
 
-const timerText = document.createElement("p");
-document.getElementById("game").appendChild(timerText);
+function moveButton() {
+  const areaWidth = playArea.clientWidth;
+  const areaHeight = playArea.clientHeight;
 
-const resultText = document.createElement("p");
-document.getElementById("game").appendChild(resultText);
+  const buttonWidth = button.offsetWidth;
+  const buttonHeight = button.offsetHeight;
 
-const restartButton = document.createElement("button");
-restartButton.textContent = "Начать заново";
-restartButton.style.display = "none";
-document.getElementById("game").appendChild(restartButton);
+  const maxX = areaWidth - buttonWidth;
+  const maxY = areaHeight - buttonHeight;
 
-function startGame() {
-  score = 0;
-  time = 10;
+  const x = Math.floor(Math.random() * maxX);
+  const y = Math.floor(Math.random() * maxY);
 
-  scoreText.textContent = score;
-  timerText.textContent = "Время: " + time;
-  resultText.textContent = "";
-  button.disabled = false;
-  restartButton.style.display = "none";
-
-  clearInterval(timer);
-
-  timer = setInterval(function () {
-    time = time - 1;
-    timerText.textContent = "Время: " + time;
-
-    if (time <= 0) {
-      clearInterval(timer);
-      button.disabled = true;
-      resultText.textContent = "Игра окончена! Твой результат: " + score;
-      restartButton.style.display = "inline-block";
-    }
-  }, 1000);
+  button.style.left = x + "px";
+  button.style.top = y + "px";
 }
 
 button.addEventListener("click", function () {
-  score = score + 1;
+  if (timeLeft <= 0) return;
+
+  score++;
   scoreText.textContent = score;
-
-const playArea = document.getElementById("playArea");
-
-const maxX = playArea.clientWidth - button.offsetWidth;
-const maxY = playArea.clientHeight - button.offsetHeight;
-
-  const randomX = Math.random() * maxX;
-  const randomY = Math.random() * maxY;
-
-  button.style.left = randomX + "px";
-  button.style.top = randomY + "px";
+  moveButton();
 });
+
+const timer = setInterval(function () {
+  timeLeft--;
+  timerText.textContent = timeLeft;
+
+  if (timeLeft <= 0) {
+    clearInterval(timer);
+    button.disabled = true;
+    button.textContent = "Стоп!";
+    message.textContent = "Игра окончена! Очки: " + score;
+  }
+}, 1000);
+
+moveButton();
