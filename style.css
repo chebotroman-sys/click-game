@@ -20,8 +20,8 @@ h1 {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 25px;
-  font-size: 22px;
+  gap: 15px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 15px;
 }
@@ -31,6 +31,26 @@ h1 {
   padding: 10px 16px;
   border-radius: 12px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.difficulty {
+  margin-bottom: 15px;
+}
+
+.level {
+  padding: 10px 15px;
+  margin: 4px;
+  border: none;
+  border-radius: 10px;
+  background: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.level.active {
+  background: #4d96ff;
+  color: white;
 }
 
 #playArea {
@@ -58,22 +78,33 @@ h1 {
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 4px 0 #b82e47;
-  transition: transform 0.1s, background 0.2s;
-}
-
-#clickButton:hover {
-  background: #ff2f55;
 }
 
 #clickButton:active {
   transform: scale(0.95);
-  box-shadow: 0 2px 0 #b82e47;
 }
 
 #clickButton:disabled {
   background: #777;
   box-shadow: 0 4px 0 #444;
   cursor: not-allowed;
+}
+
+.bomb {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: #222;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #000;
+}
+
+.bomb:active {
+  transform: scale(0.9);
 }
 
 #message {
@@ -95,12 +126,4 @@ h1 {
   cursor: pointer;
   display: none;
   box-shadow: 0 4px 0 #2265b8;
-}
-
-#restartButton:hover {
-  background: #2f83ff;
-}
-
-#restartButton:active {
-  transform: scale(0.96);
 }
