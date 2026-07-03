@@ -1,11 +1,24 @@
 let score = 0;
 let timeLeft = 30;
+let timer;
 
 const scoreText = document.getElementById("score");
 const timerText = document.getElementById("timer");
+const recordText = document.getElementById("record");
 const button = document.getElementById("clickButton");
 const playArea = document.getElementById("playArea");
 const message = document.getElementById("message");
+const restartButton = document.getElementById("restartButton");
+
+let record = localStorage.getItem("clickerRecord");
+
+if (record === null) {
+  record = 0;
+} else {
+  record = Number(record);
+}
+
+recordText.textContent = record;
 
 function moveButton() {
   const areaWidth = playArea.clientWidth;
@@ -24,6 +37,47 @@ function moveButton() {
   button.style.top = y + "px";
 }
 
+function startGame() {
+  score = 0;
+  timeLeft = 30;
+
+  scoreText.textContent = score;
+  timerText.textContent = timeLeft;
+  message.textContent = "";
+
+  button.disabled = false;
+  button.textContent = "Жми!";
+  restartButton.style.display = "none";
+
+  moveButton();
+
+  timer = setInterval(function () {
+    timeLeft--;
+    timerText.textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      endGame();
+    }
+  }, 1000);
+}
+
+function endGame() {
+  clearInterval(timer);
+
+  button.disabled = true;
+  button.textContent = "Стоп!";
+  restartButton.style.display = "inline-block";
+
+  if (score > record) {
+    record = score;
+    localStorage.setItem("clickerRecord", record);
+    recordText.textContent = record;
+    message.textContent = "Новый рекорд! Очки: " + score + " 🔥";
+  } else {
+    message.textContent = "Игра окончена! Очки: " + score;
+  }
+}
+
 button.addEventListener("click", function () {
   if (timeLeft <= 0) return;
 
@@ -32,16 +86,9 @@ button.addEventListener("click", function () {
   moveButton();
 });
 
-const timer = setInterval(function () {
-  timeLeft--;
-  timerText.textContent = timeLeft;
+restartButton.addEventListener("click", function () {
+  clearInterval(timer);
+  startGame();
+});
 
-  if (timeLeft <= 0) {
-    clearInterval(timer);
-    button.disabled = true;
-    button.textContent = "Стоп!";
-    message.textContent = "Игра окончена! Очки: " + score;
-  }
-}, 1000);
-
-moveButton();
+startGame();
